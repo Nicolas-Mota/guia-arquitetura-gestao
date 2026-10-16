@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Boundary | Guia Web de Arquitetura e Gestão</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" data-i18n="nav_brand">ARQUITETURA & GESTÃO</a>
+            <nav class="nav-links">
+                <a href="index.html" data-i18n="nav_home">Início</a>
+                <a href="microservices.html" data-i18n="nav_ms">Microservices</a>
+                <a href="application-boundary.html" class="active" data-i18n="nav_ab">Application Boundary</a>
+                <a href="serverless.html" data-i18n="nav_sv">Serverless</a>
+            </nav>
+            <div class="controls">
+                <button id="lang-toggle" class="btn-control">EN</button>
+                <button id="theme-toggle" class="btn-control" data-i18n="btn_theme">Tema Escuro</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <span class="badge" data-i18n="ab_axis">EIXO 2 - FRONTEIRAS E EVOLUÇÃO</span>
+                <h1>Application Boundary</h1>
+                <p class="article-meta" data-i18n="ab_meta">Autor do Post Original: Martin Fowler | Publicado em: 11 de setembro de 2003</p>
+                <a href="https://martinfowler.com/bliki/ApplicationBoundary.html" target="_blank" rel="noopener noreferrer" class="btn-outline" data-i18n="btn_original_post">Acessar Artigo Original em MartinFowler.com</a>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="content-block">
+                <h2 data-i18n="sec_summary">1. Resumo da Ideia Central</h2>
+                <p data-i18n="ab_summary_p1">
+                    No post "ApplicationBoundary", Martin Fowler aborda um dos problemas mais persistentes e menos óbvios da engenharia de software: o que exatamente define a fronteira de uma "aplicação"? Embora profissionais de tecnologia frequentemente tentem explicar uma aplicação sob uma ótica estritamente técnica (como um executável, um repositório ou um servidor), Fowler argumenta que essa definição falha rapidamente — exemplificando a histórica disputa antitruste sobre se um navegador web faz parte do sistema operacional ou se é uma aplicação separada.
+                </p>
+                <p data-i18n="ab_summary_p2">
+                    A tese central de Fowler é que as aplicações não vão desaparecer e que suas fronteiras são difíceis de traçar porque, fundamentalmente, as aplicações são construções sociais ("social constructions"). Uma aplicação é delimitada pela convergência de três fatores humanos e organizacionais: (1) um corpo de código que os desenvolvedores enxergam como uma única unidade; (2) um grupo de funcionalidades que os clientes de negócio enxergam como uma única unidade; e (3) uma iniciativa que os detentores do capital (patrocinadores) enxergam como um único orçamento. Por fim, Fowler conecta essa reflexão à seção de Design Estratégico do Domain-Driven Design (DDD), onde os Contextos Delimitados (Bounded Contexts) organizam a relação entre modelos e equipes.
+                </p>
+            </div>
+
+            <!-- Diagrama Arquitetural Visual em CSS -->
+            <div class="diagram-container">
+                <h3 class="diagram-title" data-i18n="ab_diag_title">Representação Visual: Os Três Pilares da Fronteira de uma Aplicação</h3>
+                <div class="pillars-diagram">
+                    <div class="pillar-card">
+                        <div class="pillar-num">01</div>
+                        <h4 data-i18n="ab_p1_title">Visão Técnica (Desenvolvedores)</h4>
+                        <p data-i18n="ab_p1_desc">Um corpo de código-fonte compreendido, mantido e versionado pela equipe de engenharia como uma única unidade coesa.</p>
+                    </div>
+                    <div class="pillar-connector">+</div>
+                    <div class="pillar-card">
+                        <div class="pillar-num">02</div>
+                        <h4 data-i18n="ab_p2_title">Visão Funcional (Clientes de Negócio)</h4>
+                        <p data-i18n="ab_p2_desc">Um conjunto integrado de funcionalidades percebido pelos usuários e gestores da área de negócio como uma solução única.</p>
+                    </div>
+                    <div class="pillar-connector">+</div>
+                    <div class="pillar-card">
+                        <div class="pillar-num">03</div>
+                        <h4 data-i18n="ab_p3_title">Visão Financeira (Patrocinadores)</h4>
+                        <p data-i18n="ab_p3_desc">Uma iniciativa corporativa que os responsáveis pelo financiamento tratam e aprovam dentro de um único orçamento.</p>
+                    </div>
+                </div>
+                <div class="pillar-result" data-i18n="ab_diag_result">
+                    RESULTADO: A Fronteira da Aplicação (Application Boundary) como Construção Social e Organizacional
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pros_cons">2. Vantagens e Desvantagens</h2>
+                <div class="pros-cons-grid">
+                    <div class="pros-box">
+                        <h3 data-i18n="title_pros">Vantagens de Reconhecer e Delimitar Fronteiras</h3>
+                        <ul>
+                            <li data-i18n="ab_pro_1"><strong>Clareza de Propriedade e Responsabilidade:</strong> Fica evidente qual equipe responde pela manutenção, evolução e suporte daquele conjunto de funcionalidades.</li>
+                            <li data-i18n="ab_pro_2"><strong>Alinhamento Orçamentário Direto:</strong> Facilita a aprovação de recursos financeiros, pois o escopo técnico corresponde à visão de investimento dos patrocinadores.</li>
+                            <li data-i18n="ab_pro_3"><strong>Redução de Carga Cognitiva:</strong> Os desenvolvedores conseguem dominar o modelo de domínio interno sem precisar compreender todos os sistemas da organização.</li>
+                            <li data-i18n="ab_pro_4"><strong>Contratos de Integração Explícitos:</strong> Reconhecer onde termina uma aplicação força as equipes a definirem interfaces formais de comunicação com sistemas externos.</li>
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h3 data-i18n="title_cons">Desvantagens e Armadilhas de Fronteiras Rígidas</h3>
+                        <ul>
+                            <li data-i18n="ab_con_1"><strong>Formação de Silos Organizacionais:</strong> Fronteiras muito rígidas podem gerar protecionismo entre equipes e dificultar processos de negócio que atravessam vários departamentos.</li>
+                            <li data-i18n="ab_con_2"><strong>Duplicação de Funcionalidades:</strong> Por ser mais fácil construir dentro do próprio orçamento do que negociar com outra equipe, diferentes aplicações acabam reimplementando lógicas idênticas.</li>
+                            <li data-i18n="ab_con_3"><strong>Conflito entre Fronteira Social e Técnica:</strong> Mudanças políticas ou cortes de orçamento podem redefinir a fronteira organizacional sem que a arquitetura do código acompanhe essa divisão.</li>
+                            <li data-i18n="ab_con_4"><strong>Custo de Integração entre Aplicações:</strong> Sempre que um requisito cruza a fronteira de duas aplicações, surge um custo adicional de tradução de modelos e negociação de prioridades.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pm_impact">3. Impacto na Gestão do Projeto</h2>
+                <p data-i18n="ab_pm_intro">
+                    Compreender que a fronteira de uma aplicação é uma construção social é uma das ferramentas mais poderosas para um gerente de projetos. Veja o impacto direto nas quatro variáveis:
+                </p>
+
+                <div class="pm-grid">
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_time_tag">DIMENSÃO 01</span>
+                            <h3 data-i18n="pm_time_title">Prazo (Cronograma)</h3>
+                        </div>
+                        <p data-i18n="ab_pm_time">
+                            Funcionalidades contidas inteiramente dentro de uma única fronteira de aplicação avançam com rapidez, pois dependem de uma só equipe e de um único ciclo de aprovação. Quando um projeto exige alterações que cruzam múltiplas fronteiras de aplicações, o cronograma sofre atrasos expressivos devido à fila de priorização de outras equipes e à necessidade de sincronizar janelas de entrega distintas.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_cost_tag">DIMENSÃO 02</span>
+                            <h3 data-i18n="pm_cost_title">Custo (Orçamento)</h3>
+                        </div>
+                        <p data-i18n="ab_pm_cost">
+                            Como apontado diretamente por Fowler, a fronteira da aplicação coincide com aquilo que os financiadores veem como um único orçamento. Na gestão de projetos, isso significa que custos internos a uma aplicação são facilmente apropriados, mas iniciativas transversais geram disputas de centro de custo (quem paga pela alteração na API da equipe vizinha?), exigindo governança executiva clara.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_team_tag">DIMENSÃO 03</span>
+                            <h3 data-i18n="pm_team_title">Equipe (Estrutura e Cultura)</h3>
+                        </div>
+                        <p data-i18n="ab_pm_team">
+                            Define a identidade e a autonomia do time. Quando a fronteira do código está alinhada à equipe de desenvolvimento e ao representante do negócio (Product Owner), a comunicação flui sem ruídos. Caso duas equipes distintas tentem trabalhar sobre a mesma base de código sem fronteiras bem delimitadas, surgem conflitos constantes de arquitetura, prioridades e responsabilidade sobre defeitos.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_risk_tag">DIMENSÃO 04</span>
+                            <h3 data-i18n="pm_risk_title">Riscos do Projeto</h3>
+                        </div>
+                        <p data-i18n="ab_pm_risk">
+                            O maior risco gerencial é tratar problemas de integração entre aplicações como meras tarefas técnicas, ignorando a barreira social e política entre as equipes envolvidas. Além disso, há o risco de acoplamento oculto via banco de dados compartilhado entre diferentes aplicações, o que viola a fronteira da aplicação e impede que qualquer um dos projetos evolua com segurança.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-box">
+                <h3 data-i18n="source_box_title">Referência Oficial Consultada</h3>
+                <p>FOWLER, Martin. <strong>ApplicationBoundary</strong>. MartinFowler.com (Bliki), 11 set. 2003.</p>
+                <p><strong data-i18n="source_url_label">URL Original:</strong> <a href="https://martinfowler.com/bliki/ApplicationBoundary.html" target="_blank" rel="noopener noreferrer">https://martinfowler.com/bliki/ApplicationBoundary.html</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p data-i18n="footer_text">SENAI EAD - Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas (4º Semestre) - Gestão de Projetos - Prof. Wesley Fioreze.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

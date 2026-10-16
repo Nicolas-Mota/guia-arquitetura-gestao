@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices | Guia Web de Arquitetura e Gestão</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" data-i18n="nav_brand">ARQUITETURA & GESTÃO</a>
+            <nav class="nav-links">
+                <a href="index.html" data-i18n="nav_home">Início</a>
+                <a href="microservices.html" class="active" data-i18n="nav_ms">Microservices</a>
+                <a href="application-boundary.html" data-i18n="nav_ab">Application Boundary</a>
+                <a href="serverless.html" data-i18n="nav_sv">Serverless</a>
+            </nav>
+            <div class="controls">
+                <button id="lang-toggle" class="btn-control">EN</button>
+                <button id="theme-toggle" class="btn-control" data-i18n="btn_theme">Tema Escuro</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <span class="badge" data-i18n="ms_axis">EIXO 1 - MICROSSERVIÇOS</span>
+                <h1>Microservices</h1>
+                <p class="article-meta" data-i18n="ms_meta">Autores do Post Original: James Lewis e Martin Fowler | Publicado em: 25 de março de 2014</p>
+                <a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener noreferrer" class="btn-outline" data-i18n="btn_original_post">Acessar Artigo Original em MartinFowler.com</a>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="content-block">
+                <h2 data-i18n="sec_summary">1. Resumo da Ideia Central</h2>
+                <p data-i18n="ms_summary_p1">
+                    No artigo clássico de James Lewis e Martin Fowler, o estilo arquitetural de Microsserviços é definido como uma abordagem para desenvolver uma única aplicação como uma suíte de pequenos serviços. Cada serviço executa em seu próprio processo e se comunica por meio de mecanismos leves, geralmente uma API de recursos sobre HTTP ou mensageria assíncrona simples. Em oposição ao modelo monolítico tradicional — onde toda a lógica de negócios é empacotada em um único processo e qualquer alteração exige a reconstrução e reimplantação do sistema inteiro —, os microsserviços priorizam a modularidade através de serviços independentemente implantáveis.
+                </p>
+                <p data-i18n="ms_summary_p2">
+                    Os autores destacam nove características comuns observadas em organizações que adotam essa arquitetura com sucesso: (1) Componentização via Serviços em vez de bibliotecas em memória; (2) Organização em torno de Capacidades de Negócio, evitando a divisão tradicional em silos técnicos de interface, lógica e banco de dados; (3) Mentalidade de Produtos e não Projetos, na qual a equipe permanece responsável pelo software em produção; (4) Endpoints inteligentes e canais de comunicação simples (Smart endpoints and dumb pipes), rejeitando barramentos pesados como ESBs; (5) Governança Descentralizada, permitindo escolher a tecnologia adequada para cada problema; (6) Gerenciamento Descentralizado de Dados, onde cada serviço possui seu próprio esquema ou banco de dados e lida com consistência eventual; (7) Automação de Infraestrutura com entrega contínua; (8) Design para Falha, reconhecendo que serviços podem cair a qualquer instante; e (9) Design Evolutivo, facilitando a substituição controlada de módulos.
+                </p>
+            </div>
+
+            <!-- Diagrama Arquitetural Visual em CSS -->
+            <div class="diagram-container">
+                <h3 class="diagram-title" data-i18n="ms_diag_title">Representação Visual: Arquitetura Monolítica vs. Microsserviços</h3>
+                <div class="diagram-grid">
+                    <div class="diagram-box">
+                        <h4 data-i18n="ms_diag_mono">Arquitetura Monolítica</h4>
+                        <div class="arch-visual">
+                            <div class="arch-node node-ui" data-i18n="ms_diag_ui">Interface de Usuário (UI)</div>
+                            <div class="arch-process">
+                                <span class="process-label" data-i18n="ms_diag_single_proc">Processo Único (Deploy Único)</span>
+                                <div class="arch-subnodes">
+                                    <div class="subnode" data-i18n="ms_mod_orders">Módulo Pedidos</div>
+                                    <div class="subnode" data-i18n="ms_mod_billing">Módulo Faturamento</div>
+                                    <div class="subnode" data-i18n="ms_mod_users">Módulo Clientes</div>
+                                </div>
+                            </div>
+                            <div class="arch-db" data-i18n="ms_diag_shared_db">Banco de Dados Único Compartilhado</div>
+                        </div>
+                    </div>
+
+                    <div class="diagram-box">
+                        <h4 data-i18n="ms_diag_micro">Arquitetura de Microsserviços</h4>
+                        <div class="arch-visual">
+                            <div class="arch-node node-ui" data-i18n="ms_diag_gateway">Interface / API HTTP Leve</div>
+                            <div class="arch-services-row">
+                                <div class="service-column">
+                                    <div class="subnode service-node" data-i18n="ms_srv_orders">Serviço Pedidos</div>
+                                    <div class="mini-db" data-i18n="ms_db_orders">BD Pedidos</div>
+                                </div>
+                                <div class="service-column">
+                                    <div class="subnode service-node" data-i18n="ms_srv_billing">Serviço Faturamento</div>
+                                    <div class="mini-db" data-i18n="ms_db_billing">BD Faturamento</div>
+                                </div>
+                                <div class="service-column">
+                                    <div class="subnode service-node" data-i18n="ms_srv_users">Serviço Clientes</div>
+                                    <div class="mini-db" data-i18n="ms_db_users">BD Clientes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pros_cons">2. Vantagens e Desvantagens</h2>
+                <div class="pros-cons-grid">
+                    <div class="pros-box">
+                        <h3 data-i18n="title_pros">Vantagens</h3>
+                        <ul>
+                            <li data-i18n="ms_pro_1"><strong>Implantação Independente:</strong> Alterações em uma funcionalidade exigem apenas o novo deploy do serviço modificado, reduzindo o escopo de impacto de cada entrega.</li>
+                            <li data-i18n="ms_pro_2"><strong>Fronteiras Modulares Fortes:</strong> Reforça a separação explícita entre módulos, o que é crucial para manter a organização do código em equipes grandes.</li>
+                            <li data-i18n="ms_pro_3"><strong>Diversidade Tecnológica (Persistência Poliglota):</strong> Permite adotar a linguagem, o framework e o banco de dados mais adequados para a necessidade específica de cada serviço.</li>
+                            <li data-i18n="ms_pro_4"><strong>Escalabilidade Granular:</strong> Apenas os serviços que sofrem maior demanda computacional precisam ser replicados, otimizando o uso de recursos de hardware.</li>
+                            <li data-i18n="ms_pro_5"><strong>Isolamento de Falhas (Bulkheads):</strong> Se um componente secundário falhar, o restante da aplicação pode continuar operando por meio de degradação graciosa.</li>
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h3 data-i18n="title_cons">Desvantagens</h3>
+                        <ul>
+                            <li data-i18n="ms_con_1"><strong>Complexidade de Sistemas Distribuídos:</strong> Chamadas de método em memória são substituídas por chamadas de rede sujeitas a latência, perda de pacotes e indisponibilidade.</li>
+                            <li data-i18n="ms_con_2"><strong>Consistência Eventual de Dados:</strong> A ausência de transações distribuídas (two-phase commit) obriga o sistema a lidar com sincronização assíncrona e lógica compensatória.</li>
+                            <li data-i18n="ms_con_3"><strong>Sobrecarga Operacional:</strong> Gerenciar dezenas de serviços exige maturidade avançada em provisionamento automatizado, pipelines de CI/CD e monitoramento centralizado.</li>
+                            <li data-i18n="ms_con_4"><strong>Dificuldade em Testes Ponta a Ponta:</strong> Validar a integração entre múltiplos serviços mantidos por equipes distintas torna os testes funcionais lentos e frágeis.</li>
+                            <li data-i18n="ms_con_5"><strong>Custo de Refatoração entre Fronteiras:</strong> Mover responsabilidades de um serviço para outro exige coordenar contratos de API e migrações de dados em rede.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pm_impact">3. Impacto na Gestão do Projeto</h2>
+                <p data-i18n="ms_pm_intro">
+                    A adoção de microsserviços altera profundamente o planejamento e a condução de um projeto de software. Abaixo está a análise detalhada nas quatro dimensões gerenciais exigidas:
+                </p>
+
+                <div class="pm-grid">
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_time_tag">DIMENSÃO 01</span>
+                            <h3 data-i18n="pm_time_title">Prazo (Cronograma)</h3>
+                        </div>
+                        <p data-i18n="ms_pm_time">
+                            No curto prazo, o cronograma sofre uma desaceleração inicial significativa devido à necessidade de construir a infraestrutura de automação de deploy, pipelines de integração contínua, descoberta de serviços e observabilidade (o chamado "Microservice Premium"). Contudo, em projetos de médio e longo prazo com escopo complexo, os prazos de entrega de novas funcionalidades diminuem porque múltiplas equipes trabalham em paralelo sem bloqueios de merge ou janelas de implantação monolíticas.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_cost_tag">DIMENSÃO 02</span>
+                            <h3 data-i18n="pm_cost_title">Custo (Orçamento)</h3>
+                        </div>
+                        <p data-i18n="ms_pm_cost">
+                            O orçamento inicial é substancialmente mais elevado do que em uma arquitetura monolítica. Há custos diretos com múltiplos ambientes de execução, bancos de dados isolados, tráfego de rede entre serviços, ferramentas de telemetria e profissionais com senioridade em DevOps e computação em nuvem. O retorno financeiro só se justifica quando o sistema atinge uma escala onde o custo de coordenação em um monólito superaria o custo operacional da distribuição.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_team_tag">DIMENSÃO 03</span>
+                            <h3 data-i18n="pm_team_title">Equipe (Estrutura e Cultura)</h3>
+                        </div>
+                        <p data-i18n="ms_pm_team">
+                            Aplicação direta da Lei de Conway: a gestão deve abandonar equipes divididas por camadas tecnológicas (time de UI, time de Backend, time de DBA) e estruturar equipes multifuncionais autônomas alinhadas às capacidades de negócio (tamanho "duas pizzas" da Amazon). Além disso, exige a mudança do modelo de projeto temporário para o modelo de produto contínuo, seguindo o lema "you build it, you run it" (quem desenvolve é responsável por operar em produção).
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_risk_tag">DIMENSÃO 04</span>
+                            <h3 data-i18n="pm_risk_title">Riscos do Projeto</h3>
+                        </div>
+                        <p data-i18n="ms_pm_risk">
+                            O principal risco gerencial é a decomposição prematura: dividir o sistema em microsserviços antes de compreender claramente o domínio de negócio gera acoplamento distribuído (o "monólito distribuído"), provocando atrasos severos. Outros riscos incluem falhas em cascata na produção caso não sejam implementados padrões de resiliência (como Circuit Breakers e Timeouts) e quebra de contratos de API entre equipes se não houver padrões como Tolerant Reader e Consumer-Driven Contracts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-box">
+                <h3 data-i18n="source_box_title">Referência Oficial Consultada</h3>
+                <p>LEWIS, James; FOWLER, Martin. <strong>Microservices: a definition of this new architectural term</strong>. MartinFowler.com, 25 mar. 2014.</p>
+                <p><strong data-i18n="source_url_label">URL Original:</strong> <a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener noreferrer">https://martinfowler.com/articles/microservices.html</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p data-i18n="footer_text">SENAI EAD - Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas (4º Semestre) - Gestão de Projetos - Prof. Wesley Fioreze.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

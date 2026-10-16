@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Web de Arquitetura de Software e Gestão de Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" data-i18n="nav_brand">ARQUITETURA & GESTÃO</a>
+            <nav class="nav-links">
+                <a href="index.html" class="active" data-i18n="nav_home">Início</a>
+                <a href="microservices.html" data-i18n="nav_ms">Microservices</a>
+                <a href="application-boundary.html" data-i18n="nav_ab">Application Boundary</a>
+                <a href="serverless.html" data-i18n="nav_sv">Serverless</a>
+            </nav>
+            <div class="controls">
+                <button id="lang-toggle" class="btn-control" aria-label="Alternar Idioma">EN</button>
+                <button id="theme-toggle" class="btn-control" aria-label="Alternar Tema" data-i18n="btn_theme">Tema Escuro</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <span class="badge" data-i18n="hero_badge">SENAI EAD | Análise e Desenvolvimento de Sistemas - 4º Semestre</span>
+                <h1 data-i18n="hero_title">Guia Web de Arquitetura de Software na Gestão de Projetos</h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    Análise técnica e gerencial de três padrões fundamentais documentados no portal de Martin Fowler, avaliando como decisões arquiteturais impactam diretamente o prazo, o custo, a estrutura de equipes e os riscos de um projeto de software.
+                </p>
+                <div class="meta-bar">
+                    <div class="meta-item">
+                        <strong data-i18n="meta_uc_label">Unidade Curricular:</strong>
+                        <span data-i18n="meta_uc_val">Gestão de Projetos</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong data-i18n="meta_prof_label">Docente:</strong>
+                        <span>Prof. Wesley Fioreze</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong data-i18n="meta_ref_label">Referência Base:</strong>
+                        <span>MartinFowler.com</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="section-header">
+                <h2 data-i18n="axes_title">Eixos Arquiteturais Analisados</h2>
+                <p data-i18n="axes_desc">Selecione um dos três artigos abaixo para acessar a síntese conceitual, diagramas comparativos, vantagens, desvantagens e a matriz de impacto na gestão de projetos.</p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <article class="arch-card">
+                    <div class="card-axis" data-i18n="card1_axis">EIXO 1 - MICROSSERVIÇOS</div>
+                    <h3>Microservices</h3>
+                    <p class="card-author">James Lewis & Martin Fowler (2014)</p>
+                    <p class="card-text" data-i18n="card1_desc">
+                        Abordagem que desenvolve uma aplicação única como uma suíte de pequenos serviços independentes, organizados em torno de capacidades de negócio, com governança e dados descentralizados.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag" data-i18n="card1_tag1">Deploy Independente</span>
+                        <span class="tag" data-i18n="card1_tag2">Dados Descentralizados</span>
+                    </div>
+                    <a href="microservices.html" class="btn-primary" data-i18n="btn_read">Acessar Análise Completa</a>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="arch-card">
+                    <div class="card-axis" data-i18n="card2_axis">EIXO 2 - FRONTEIRAS E EVOLUÇÃO</div>
+                    <h3>Application Boundary</h3>
+                    <p class="card-author">Martin Fowler (2003)</p>
+                    <p class="card-text" data-i18n="card2_desc">
+                        Discussão sobre o que realmente delimita uma aplicação de software, demonstrando que as fronteiras são construções sociais moldadas por desenvolvedores, áreas de negócio e orçamento.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag" data-i18n="card2_tag1">Construção Social</span>
+                        <span class="tag" data-i18n="card2_tag2">Governança e Orçamento</span>
+                    </div>
+                    <a href="application-boundary.html" class="btn-primary" data-i18n="btn_read">Acessar Análise Completa</a>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="arch-card">
+                    <div class="card-axis" data-i18n="card3_axis">EIXO 3 - CAMADAS E EXECUÇÃO</div>
+                    <h3>Serverless Architectures</h3>
+                    <p class="card-author">Mike Roberts (2016 / 2018)</p>
+                    <p class="card-text" data-i18n="card3_desc">
+                        Estudo sobre sistemas baseados em serviços de terceiros (BaaS) e execução de funções em contêineres efêmeros orientados a eventos (FaaS), eliminando processos de servidor sempre ativos.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag" data-i18n="card3_tag1">BaaS e FaaS</span>
+                        <span class="tag" data-i18n="card3_tag2">Escala Automática</span>
+                    </div>
+                    <a href="serverless.html" class="btn-primary" data-i18n="btn_read">Acessar Análise Completa</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section bg-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="matrix_title">Visão Comparativa na Gestão de Projetos</h2>
+                    <p data-i18n="matrix_desc">Síntese executiva de como cada conceito influencia as quatro variáveis críticas do gerenciamento de projetos.</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="th_concept">Conceito / Artigo</th>
+                                <th data-i18n="th_time">Prazo (Cronograma)</th>
+                                <th data-i18n="th_cost">Custo (Orçamento)</th>
+                                <th data-i18n="th_team">Equipe (Organização)</th>
+                                <th data-i18n="th_risk">Riscos Críticos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Microservices</strong></td>
+                                <td data-i18n="tb_ms_time">Setup inicial mais lento; entregas contínuas mais rápidas na maturidade.</td>
+                                <td data-i18n="tb_ms_cost">Alto investimento inicial em infraestrutura, automação de CI/CD e observabilidade.</td>
+                                <td data-i18n="tb_ms_team">Equipes multifuncionais autônomas orientadas a produto ("you build it, you run it").</td>
+                                <td data-i18n="tb_ms_risk">Complexidade operacional distribuída, consistência eventual e falhas em cascata.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Application Boundary</strong></td>
+                                <td data-i18n="tb_ab_time">Reduz atrasos quando as fronteiras minimizam dependências entre times distintos.</td>
+                                <td data-i18n="tb_ab_cost">Define diretamente a alocação de centros de custo e fontes de financiamento.</td>
+                                <td data-i18n="tb_ab_team">Alinha a base de código à unidade social da equipe e aos clientes de negócio.</td>
+                                <td data-i18n="tb_ab_risk">Silos organizacionais, atrito político em integrações e duplicação de esforços.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serverless Architectures</strong></td>
+                                <td data-i18n="tb_sv_time">Redução expressiva do Time-to-Market e alta velocidade para experimentação.</td>
+                                <td data-i18n="tb_sv_cost">Substitui custo fixo de servidores ociosos por cobrança exata por execução (OpEx).</td>
+                                <td data-i18n="tb_sv_team">Reduz necessidade de administração de infraestrutura; exige foco em arquitetura de eventos.</td>
+                                <td data-i18n="tb_sv_risk">Dependência de fornecedor (Vendor Lock-in), latência de partida a frio (Cold Start) e testes complexos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="section-header">
+                <h2 data-i18n="team_title">Integrantes da Equipe</h2>
+                <p data-i18n="team_desc">Trabalho desenvolvido para a disciplina de Gestão de Projetos do Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas.</p>
+            </div>
+
+            <!-- EDITE AQUI OS NOMES E LINKS DOS INTEGRANTES DA SUA EQUIPE -->
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="member-role" data-i18n="member_role">Integrante 01</div>
+                    <h4>Nicolas Mota de Almeida</h4>
+                    <p data-i18n="member_course">Análise e Desenvolvimento de Sistemas - 4º Semestre</p>
+                </div>
+                <div class="team-card">
+                    <div class="member-role" data-i18n="member_role_2">Integrante 02</div>
+                    <h4>Daniel Fonseca da Silva</h4>
+                    <p data-i18n="member_course">Análise e Desenvolvimento de Sistemas - 4º Semestre</p>
+                </div>
+                <div class="team-card">
+                    <div class="member-role" data-i18n="member_role_3">Integrante 03</div>
+                    <h4>Paulo Otávio Silva Pereira</h4>
+                    <p data-i18n="member_course">Análise e Desenvolvimento de Sistemas - 4º Semestre</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p data-i18n="footer_text">SENAI EAD - Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas (4º Semestre) - Gestão de Projetos - Prof. Wesley Fioreze.</p>
+            <p class="footer-note" data-i18n="footer_ai">Nota de Transparência: Estrutura de código e revisão auxiliadas por Inteligência Artificial, com validação técnica integral nos artigos originais de MartinFowler.com.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

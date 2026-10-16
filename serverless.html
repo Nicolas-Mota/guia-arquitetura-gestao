@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless Architectures | Guia Web de Arquitetura e Gestão</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" data-i18n="nav_brand">ARQUITETURA & GESTÃO</a>
+            <nav class="nav-links">
+                <a href="index.html" data-i18n="nav_home">Início</a>
+                <a href="microservices.html" data-i18n="nav_ms">Microservices</a>
+                <a href="application-boundary.html" data-i18n="nav_ab">Application Boundary</a>
+                <a href="serverless.html" class="active" data-i18n="nav_sv">Serverless</a>
+            </nav>
+            <div class="controls">
+                <button id="lang-toggle" class="btn-control">EN</button>
+                <button id="theme-toggle" class="btn-control" data-i18n="btn_theme">Tema Escuro</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <span class="badge" data-i18n="sv_axis">EIXO 3 - CAMADAS E EXECUÇÃO</span>
+                <h1>Serverless Architectures</h1>
+                <p class="article-meta" data-i18n="sv_meta">Autor do Post Original: Mike Roberts (Portal MartinFowler.com) | Atualizado em: 22 de maio de 2018</p>
+                <a href="https://martinfowler.com/articles/serverless.html" target="_blank" rel="noopener noreferrer" class="btn-outline" data-i18n="btn_original_post">Acessar Artigo Original em MartinFowler.com</a>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="content-block">
+                <h2 data-i18n="sec_summary">1. Resumo da Ideia Central</h2>
+                <p data-i18n="sv_summary_p1">
+                    No artigo "Serverless Architectures", publicado no site de Martin Fowler, Mike Roberts explica que arquiteturas Serverless são designs de aplicação que incorporam serviços de terceiros hospedados na nuvem, conhecidos como BaaS (Backend as a Service), e/ou que executam código personalizado em contêineres efêmeros e gerenciados em uma plataforma FaaS (Function as a Service). O termo "sem servidor" não significa a inexistência física de servidores, mas sim que a equipe de desenvolvimento deixa de gerenciar processos de servidor sempre ativos ("always-on server components").
+                </p>
+                <p data-i18n="sv_summary_p2">
+                    Com o BaaS, a aplicação delega componentes inteiros a provedores externos — como bancos de dados acessados diretamente pelo cliente (Firebase) e serviços de autenticação (Auth0), transferindo parte da lógica para o lado do cliente (Rich Client). Já com o FaaS (como AWS Lambda, Azure Functions e Google Cloud Functions), os desenvolvedores escrevem pequenas funções sem estado (stateless) que são instanciadas, executadas e encerradas automaticamente pelo provedor de nuvem em resposta a eventos ou requisições via API Gateway. Isso transforma a estrutura de camadas tradicional, decompondo o sistema por funções e eventos com escalabilidade horizontal automática e cobrança estrita por tempo de execução.
+                </p>
+            </div>
+
+            <!-- Diagrama Arquitetural Visual em CSS -->
+            <div class="diagram-container">
+                <h3 class="diagram-title" data-i18n="sv_diag_title">Representação Visual: Arquitetura de 3 Camadas vs. Arquitetura Serverless (BaaS + FaaS)</h3>
+                <div class="diagram-grid">
+                    <div class="diagram-box">
+                        <h4 data-i18n="sv_diag_trad">Arquitetura Tradicional (Sempre Ativa)</h4>
+                        <div class="arch-visual">
+                            <div class="arch-node node-ui" data-i18n="sv_diag_client1">Cliente (Browser / App)</div>
+                            <div class="arch-process">
+                                <span class="process-label" data-i18n="sv_diag_server_proc">Servidor Backend 24/7 (Autenticação + Negócio)</span>
+                            </div>
+                            <div class="arch-db" data-i18n="sv_diag_db1">Banco de Dados Gerenciado Internamente</div>
+                        </div>
+                    </div>
+
+                    <div class="diagram-box">
+                        <h4 data-i18n="sv_diag_serverless">Arquitetura Serverless (Orientada a Eventos)</h4>
+                        <div class="arch-visual">
+                            <div class="arch-node node-ui" data-i18n="sv_diag_client2">Rich Client (UI + Lógica no Cliente)</div>
+                            <div class="arch-services-row">
+                                <div class="service-column">
+                                    <div class="subnode baas-node" data-i18n="sv_node_auth">BaaS Autenticação</div>
+                                </div>
+                                <div class="service-column">
+                                    <div class="subnode service-node" data-i18n="sv_node_faas">API Gateway + FaaS (Efêmero)</div>
+                                    <div class="mini-db" data-i18n="sv_node_db">BD Compartilhado</div>
+                                </div>
+                                <div class="service-column">
+                                    <div class="subnode baas-node" data-i18n="sv_node_baasdb">BaaS Dados Diretos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pros_cons">2. Vantagens e Desvantagens</h2>
+                <div class="pros-cons-grid">
+                    <div class="pros-box">
+                        <h3 data-i18n="title_pros">Vantagens</h3>
+                        <ul>
+                            <li data-i18n="sv_pro_1"><strong>Redução de Custo com Capacidade Ociosa:</strong> Você paga apenas pelo tempo exato de processamento de cada requisição ou evento (frações de segundo), eliminando gastos com servidores subutilizados 24 horas por dia.</li>
+                            <li data-i18n="sv_pro_2"><strong>Escalabilidade Automática e Instantânea:</strong> O provedor FaaS escala horizontalmente desde zero até milhares de instâncias concorrentes sem necessidade de configurar regras manuais de auto-scaling.</li>
+                            <li data-i18n="sv_pro_3"><strong>Menor Complexidade Operacional e de Deploy:</strong> Não há gerenciamento de sistema operacional, aplicação de patches ou configuração de contêineres; o deploy resume-se ao envio do código da função.</li>
+                            <li data-i18n="sv_pro_4"><strong>Menor Time-to-Market e Experimentação Contínua:</strong> O uso de BaaS para funções prontas (como login) e FaaS para ouvintes de eventos reduz drasticamente o tempo entre uma nova ideia e sua validação em produção.</li>
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h3 data-i18n="title_cons">Desvantagens e Limitações</h3>
+                        <ul>
+                            <li data-i18n="sv_con_1"><strong>Dependência de Fornecedor (Vendor Lock-in):</strong> Forte acoplamento às APIs de BaaS e aos gatilhos de eventos proprietários de cada provedor de nuvem, dificultando a migração.</li>
+                            <li data-i18n="sv_con_2"><strong>Latência de Partida a Frio (Cold Starts):</strong> Quando uma função FaaS fica inativa ou sofre pico repentino, a inicialização de um novo contêiner efêmero adiciona latência perceptível à requisição.</li>
+                            <li data-i18n="sv_con_3"><strong>Ausência de Estado em Memória (Stateless):</strong> Como as funções são efêmeras, não é possível manter cache local ou estado de sessão em memória entre chamadas, exigindo acessos externos rápidos.</li>
+                            <li data-i18n="sv_con_4"><strong>Complexidade em Testes de Integração e Depuração:</strong> Simular o ambiente de nuvem localmente é difícil, tornando os testes integrados dependentes de ambientes remotos e o monitoramento distribuído essencial.</li>
+                            <li data-i18n="sv_con_5"><strong>Expansão da Superfície de Segurança e Multitenancy:</strong> Quando clientes acessam bancos BaaS diretamente, a configuração incorreta de permissões pode expor dados críticos; além disso, há compartilhamento físico de infraestrutura no provedor.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2 data-i18n="sec_pm_impact">3. Impacto na Gestão do Projeto</h2>
+                <p data-i18n="sv_pm_intro">
+                    Adotar uma arquitetura Serverless modifica o perfil de investimento, a velocidade de entrega e a matriz de riscos do projeto. Confira os impactos gerenciais:
+                </p>
+
+                <div class="pm-grid">
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_time_tag">DIMENSÃO 01</span>
+                            <h3 data-i18n="pm_time_title">Prazo (Cronograma)</h3>
+                        </div>
+                        <p data-i18n="sv_pm_time">
+                            Acelera substancialmente o cronograma inicial de produtos novos (MVPs) e protótipos evolutivos. Ao terceirizar autenticação e persistência via BaaS e evitar a configuração de servidores com FaaS, a equipe entrega valor de negócio já nas primeiras semanas. Contudo, em sistemas grandes com centenas de funções FaaS interdependentes, o tempo gasto na manutenção de testes de integração e coordenação de deploys pode crescer ao longo do projeto.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_cost_tag">DIMENSÃO 02</span>
+                            <h3 data-i18n="pm_cost_title">Custo (Orçamento)</h3>
+                        </div>
+                        <p data-i18n="sv_pm_cost">
+                            Transforma despesas de capital ou infraestrutura fixa em custos operacionais variáveis (OpEx) proporcionais ao uso real. Além de reduzir a conta de nuvem em cargas de trabalho intermitentes ou imprevisíveis, reduz drasticamente o custo de mão de obra com administração de servidores e criação de infraestrutura básica. Entretanto, sob tráfego constante e massivo em alta escala, o custo por requisição do FaaS pode superar o de servidores dedicados provisionados.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_team_tag">DIMENSÃO 03</span>
+                            <h3 data-i18n="pm_team_title">Equipe (Estrutura e Cultura)</h3>
+                        </div>
+                        <p data-i18n="sv_pm_team">
+                            Embora frequentemente associado ao termo "NoOps", Mike Roberts alerta que operações não deixam de existir: a administração do sistema operacional é terceirizada ao provedor, mas a equipe de desenvolvimento passa a ser diretamente responsável por monitoramento, segurança, redes e configuração de serviços na nuvem. Além disso, como mais regras ficam no cliente (BaaS), exige maior integração entre desenvolvedores Frontend/Mobile e engenheiros de nuvem.
+                        </p>
+                    </div>
+
+                    <div class="pm-card">
+                        <div class="pm-header">
+                            <span class="pm-tag" data-i18n="pm_risk_tag">DIMENSÃO 04</span>
+                            <h3 data-i18n="pm_risk_title">Riscos do Projeto</h3>
+                        </div>
+                        <p data-i18n="sv_pm_risk">
+                            Os riscos principais incluem o aprisionamento tecnológico (Vendor Lock-in), onde mudanças de preço ou descontinuação de um serviço BaaS/FaaS exigem reescrever partes críticas do projeto; o risco de sobrecarga em componentes não-serverless (como um banco de dados relacional tradicional sendo inundado por mil funções FaaS escalando simultaneamente); e limites rígidos de tempo máximo de execução por função impostos pelos provedores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-box">
+                <h3 data-i18n="source_box_title">Referência Oficial Consultada</h3>
+                <p>ROBERTS, Mike. <strong>Serverless Architectures</strong>. MartinFowler.com, 4 ago. 2016 (atualizado em 22 maio 2018).</p>
+                <p><strong data-i18n="source_url_label">URL Original:</strong> <a href="https://martinfowler.com/articles/serverless.html" target="_blank" rel="noopener noreferrer">https://martinfowler.com/articles/serverless.html</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p data-i18n="footer_text">SENAI EAD - Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas (4º Semestre) - Gestão de Projetos - Prof. Wesley Fioreze.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
